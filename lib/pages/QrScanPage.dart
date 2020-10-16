@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterITM/pages/detail.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
@@ -15,15 +16,19 @@ class _QRScanPageState extends State<QRScanPage> {
   Uint8List bytes = Uint8List(0);
   TextEditingController _outputController;
 
-  String code = "";
-  String getcode = "";
+  // String code = "";
+  // String getcode = "";
 
   Future _scanqr() async {
-    getcode = await FlutterBarcodeScanner.scanBarcode(
-        "#009922", "CANCEL", true, ScanMode.QR);
-    setState(() {
-      code = getcode;
+    await FlutterBarcodeScanner.scanBarcode(
+            "#009922", "CANCEL", true, ScanMode.QR)
+        .then((String code) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => Detail(code)));
     });
+    // setState(() {
+    //   code = getcode;
+    // });
   }
 
   @override
@@ -76,9 +81,9 @@ class _QRScanPageState extends State<QRScanPage> {
                     Divider(height: 40),
                     Expanded(
                         flex: 0,
-                        child:
-                            Text('Scan 555', style: TextStyle(fontSize: 25))),
-                    Text(code),
+                        child: Text('Scan [QR Code]',
+                            style: TextStyle(fontSize: 25))),
+                    // Text(code),
                     Divider(height: 40),
                   ],
                 ),
