@@ -34,11 +34,11 @@ class _MenuState extends State<Menu> {
             ),
             ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
+              title: Text('แจ้งซ่อม'),
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              title: Text('รายการแจ้งซ่อม'),
             ),
           ],
         ),
