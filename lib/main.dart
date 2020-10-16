@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterITM/pages/HomeStack.dart';
+import 'package:flutterITM/pages/Login.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       //home: HomePage(),
       initialRoute: '/',
       routes: {
-        '/': (context) => HomeStack(),
+        '/': (context) => LoginPage(),
+        '/HomeStack': (context) => HomeStack(),
       },
     );
   }

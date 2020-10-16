@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
@@ -14,23 +15,26 @@ class _State extends State<LoginPage> {
   String msg = '';
 
   Future<List> _login() async {
-    final response = await http
-        .post("http://192.168.1.10/FlutterRepairITM/login.php", body: {
+    final response =
+        await http.post("http://192.168.1.10/FlutterITM/login.php", body: {
       "emp_code": emp_code.text,
       "password": password.text,
     });
     // print(response.body);
     var datauser = json.decode(response.body);
 
+    if (datauser == "Success") {
+      await FlutterSession().set('token', emp_code.text);
+    }
     if (datauser.length == 0) {
       setState(() {
         msg = "Login Fail";
       });
     } else {
       if (datauser[0]['userlevel'] == 'Admin') {
-        Navigator.pushReplacementNamed(context, '/dashboard');
+        Navigator.pushReplacementNamed(context, '/HomeStack');
       } else if (datauser[0]['userlevel'] == 'Personnel') {
-        Navigator.pushReplacementNamed(context, '/dashboard');
+        Navigator.pushReplacementNamed(context, '/HomeStack');
       }
     }
   }

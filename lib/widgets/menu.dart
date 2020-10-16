@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 
 class Menu extends StatefulWidget {
   Menu({Key key}) : super(key: key);
@@ -15,7 +16,7 @@ class _MenuState extends State<Menu> {
       child: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const <Widget>[
+          children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
@@ -28,6 +29,13 @@ class _MenuState extends State<Menu> {
                 ),
               ),
             ),
+            FutureBuilder(
+                future: FlutterSession().get('token'),
+                builder: (context, snapshot) {
+                  return Text(snapshot.hasData
+                      ? snapshot.data.toString()
+                      : 'Loading....');
+                }),
             ListTile(
               leading: Icon(Icons.home),
               title: Text('หน้าหลัก'),
