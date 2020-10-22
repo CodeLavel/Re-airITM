@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterITM/pages/AboutPage.dart';
 import 'package:flutterITM/pages/HomePage.dart';
+import 'package:flutterITM/pages/ListRepairPage.dart';
 import 'package:flutterITM/pages/QrScanPage.dart';
 import 'package:flutterITM/pages/RepairPage.dart';
 
@@ -22,9 +23,9 @@ class _HomeStackState extends State<HomeStack> {
           case 'homestack/home':
             builder = (BuildContext _) => HomePage();
             break;
-          // case 'homestack/about':
-          //   builder = (BuildContext _) => AboutPage();
-          //   break;
+          case 'homestack/listrepair':
+            builder = (BuildContext _) => ListRepairPage();
+            break;
           case 'homestack/repair':
             builder = (BuildContext _) => RepairPage();
             break;

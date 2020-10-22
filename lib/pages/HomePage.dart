@@ -89,26 +89,31 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.blue[400],
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Image(
-                    image: AssetImage('assets/images/list.png'),
-                    width: 80,
-                  ),
-                  // Icon(
-                  //   Icons.list_alt,
-                  //   size: 60,
-                  // ),
-                  Text(
-                    'รายการแจ้งซ่อม',
-                    style: TextStyle(fontSize: 24),
-                  )
-                ],
+            GestureDetector(
+              onTap: () async {
+                await Navigator.pushNamed(context, 'homestack/listrepair');
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Image(
+                      image: AssetImage('assets/images/list.png'),
+                      width: 80,
+                    ),
+                    // Icon(
+                    //   Icons.list_alt,
+                    //   size: 60,
+                    // ),
+                    Text(
+                      'รายการแจ้งซ่อม',
+                      style: TextStyle(fontSize: 24),
+                    )
+                  ],
+                ),
+                color: Colors.blue[400],
               ),
-              color: Colors.blue[400],
             ),
             GestureDetector(
               onTap: () async {
