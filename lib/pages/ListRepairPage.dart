@@ -11,18 +11,34 @@ class ListRepairPage extends StatefulWidget {
 }
 
 class _ListRepairPageState extends State<ListRepairPage> {
+  var respondList = null;
   Repair repair;
-  Future<Repair> getRepair() async {
+  //List<Repair> repairList = new List<Repair>();
+  List<DataRow> listRow = new List<DataRow>();
+  Future<List<DataRow>> getRepair() async {
     await http
         .get("http://192.168.1.10/FlutterITM/getrepair.php")
         .then((response) {
       if (jsonDecode(response.body) != null) {
         setState(() {
-          repair = Repair.fromJson(jsonDecode(response.body));
+          respondList = jsonDecode(response.body)["data"];
+          for (var i = 0; i < respondList.length; i++) {
+            repair = Repair.fromJson(respondList[i]);
+            listRow.add(DataRow(
+              cells: <DataCell>[
+                DataCell(Text(
+                    "${repair.id}")), //Extracting from Map element the value
+                DataCell(Text("${repair.rpCode}")),
+                DataCell(Text("${repair.acID}")),
+                DataCell(Text("${repair.rpStatus}")),
+              ],
+            ));
+            //repairList.add(repair);
+          }
         });
       }
     });
-    return repair;
+    return listRow;
   }
 
   @override
@@ -39,28 +55,29 @@ class _ListRepairPageState extends State<ListRepairPage> {
           title: Text('รายการแจ้งซ่อม'),
         ),
         body: ListView(children: <Widget>[
-          DataTable(columns: [
-            DataColumn(label: Text('#')),
-            DataColumn(label: Text('รหัสแจ้งซ่อม')),
-            DataColumn(label: Text('รหัสพนักงาน')),
-            DataColumn(label: Text('เลขครุภัณฑ์')),
-            DataColumn(label: Text('สถานะ')),
-            DataColumn(label: Text('วันที่แจ้ง')),
-            DataColumn(label: Text('รายละเอียด')),
-          ], rows: [
+          DataTable(
+              columns: [
+                DataColumn(label: Text('#')),
+                DataColumn(label: Text('รหัสแจ้งซ่อม')),
+                DataColumn(label: Text('เลขครุภัณฑ์')),
+                DataColumn(label: Text('สถานะ')),
+              ],
+              rows:
+                  listRow /*[
             DataRow(
               cells: <DataCell>[
                 DataCell(Text(
-                    "${repair.id}")), //Extracting from Map element the value
-                DataCell(Text("${repair.rpCode}")),
-                DataCell(Text("${repair.empCode}")),
-                DataCell(Text("${repair.acID}")),
-                DataCell(Text("${repair.rpStatus}")),
-                DataCell(Text("${repair.rpDate}")),
-                DataCell(Text("${repair.rpDetail}")),
+                    "${repairList[0].id}")), //Extracting from Map element the value
+                DataCell(Text("${repairList[0].rpCode}")),
+                DataCell(Text("${repairList[0].empCode}")),
+                DataCell(Text("${repairList[0].acID}")),
+                DataCell(Text("${repairList[0].rpStatus}")),
+                DataCell(Text("${repairList[0].rpDate}")),
+                DataCell(Text("${repairList[0].rpDetail}")),
               ],
             ),
-          ]),
+          ]*/
+              ),
         ]));
   }
 }
