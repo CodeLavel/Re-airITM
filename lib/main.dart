@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Repair ITM',
       theme: ThemeData(
-        primaryColor: Color(0xFFBBDEFB),
+        primaryColor: Colors.blue[200],
         accentColor: Color(0xFFBBDEFB),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

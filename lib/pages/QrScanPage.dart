@@ -21,7 +21,7 @@ class _QRScanPageState extends State<QRScanPage> {
 
   Future _scanqr() async {
     await FlutterBarcodeScanner.scanBarcode(
-            "#009922", "CANCEL", true, ScanMode.QR)
+            "#009922", "Cancel", true, ScanMode.QR)
         .then((String code) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => Detail(code)));

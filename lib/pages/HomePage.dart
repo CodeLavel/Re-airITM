@@ -3,6 +3,7 @@ import 'package:flutterITM/pages/AboutPage.dart';
 import 'package:flutterITM/pages/FirstPage.dart';
 import 'package:flutterITM/pages/ListRepairPage.dart';
 import 'package:flutterITM/pages/QrScanPage.dart';
+import 'package:flutterITM/pages/notificationPage.dart';
 import 'package:flutterITM/widgets/logo.dart';
 import 'package:flutterITM/widgets/menu.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     ListRepairPage(),
     QRScanPage(),
     FirstPage(),
-    QRScanPage(),
+    NotificationPage(),
     AboutPage(),
   ];
   void onTabTapped(int index) {
@@ -82,7 +83,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
           ),
           Icon(
-            Icons.menu,
+            Icons.settings,
             size: 30,
             color: Colors.white,
           ),
