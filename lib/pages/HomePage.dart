@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutterITM/pages/AboutPage.dart';
+import 'package:flutterITM/pages/FirstPage.dart';
+import 'package:flutterITM/pages/ListRepairPage.dart';
+import 'package:flutterITM/pages/QrScanPage.dart';
 import 'package:flutterITM/widgets/logo.dart';
 import 'package:flutterITM/widgets/menu.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -12,6 +17,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _currentIndex = 2;
+
+  final List<Widget> _children = [
+    ListRepairPage(),
+    QRScanPage(),
+    FirstPage(),
+    QRScanPage(),
+    AboutPage(),
+  ];
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   var indexpages = [
     "แจ้งซ่อม",
     "รายการแจ้งซ่อม",
@@ -27,141 +47,49 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Menu(),
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Logo(),
+      // drawer: Menu(),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: const Logo(),
+      // ),
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.white,
+        color: Colors.blue,
+        buttonBackgroundColor: Colors.blue,
+        height: 60,
+        animationDuration: Duration(microseconds: 200),
+        index: 2,
+        animationCurve: Curves.bounceInOut,
+        items: [
+          Icon(
+            Icons.list,
+            size: 30,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.qr_code,
+            size: 30,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.inbox,
+            size: 30,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.notifications,
+            size: 30,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.menu,
+            size: 30,
+            color: Colors.white,
+          ),
+        ],
+        onTap: onTabTapped,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.blue[300],
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.star, color: Colors.white),
-                title: Text(
-                  'หน้าแรก',
-                  style: TextStyle(color: Colors.white),
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.accessibility, color: Colors.white),
-                title: Text(
-                  'ข้อมูล',
-                  style: TextStyle(color: Colors.white),
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.menu, color: Colors.white),
-                title: Text(
-                  'อื่นๆ',
-                  style: TextStyle(color: Colors.white),
-                )),
-          ]),
-      body: Container(
-        child: GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(20),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () async {
-                await Navigator.pushNamed(context, 'homestack/repair');
-              },
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image(
-                      image: AssetImage('assets/images/repair.png'),
-                      width: 80,
-                    ),
-                    // Icon(
-                    //   Icons.notifications_active,
-                    //   size: 60,
-                    // ),
-                    Text(
-                      'แจ้งซ่อม',
-                      style: TextStyle(fontSize: 24),
-                    )
-                  ],
-                ),
-                color: Colors.blue[400],
-              ),
-            ),
-            GestureDetector(
-              onTap: () async {
-                await Navigator.pushNamed(context, 'homestack/listrepair');
-              },
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image(
-                      image: AssetImage('assets/images/list.png'),
-                      width: 80,
-                    ),
-                    // Icon(
-                    //   Icons.list_alt,
-                    //   size: 60,
-                    // ),
-                    Text(
-                      'รายการแจ้งซ่อม',
-                      style: TextStyle(fontSize: 24),
-                    )
-                  ],
-                ),
-                color: Colors.blue[400],
-              ),
-            ),
-            GestureDetector(
-              onTap: () async {
-                await Navigator.pushNamed(context, 'homestack/qrscan');
-              },
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image(
-                      image: AssetImage('assets/images/qrcode.png'),
-                      width: 80,
-                    ),
-                    // Icon(
-                    //   Icons.qr_code_scanner,
-                    //   size: 60,
-                    // ),
-                    Text(
-                      'สแกน QR Code',
-                      style: TextStyle(fontSize: 24),
-                    )
-                  ],
-                ),
-                color: Colors.blue[400],
-              ),
-            ),
-            // GestureDetector(
-            //   onTap: () async {
-            //     await Navigator.pushNamed(context, 'homestack/about');
-            //   },
-            //   child: Container(
-            //     padding: const EdgeInsets.all(8),
-            //     child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: <Widget>[
-            //         Text(
-            //           'เกี่ยวกับ',
-            //           style: TextStyle(fontSize: 24),
-            //         )
-            //       ],
-            //     ),
-            //     color: Colors.blue[400],
-            //   ),
-            // ),
-          ],
-        ),
-      ),
+      body: _children[_currentIndex],
     );
   }
 }

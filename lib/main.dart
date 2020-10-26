@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterITM/pages/HomeStack.dart';
 import 'package:flutterITM/pages/Login.dart';
+import 'package:flutterITM/pages/WelcomePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,10 +20,11 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       //home: HomePage(),
-      initialRoute: '/',
+      initialRoute: '/Welcome',
       routes: {
         '/': (context) => LoginPage(),
         '/HomeStack': (context) => HomeStack(),
+        '/Welcome': (context) => WelcomePage(),
       },
     );
   }

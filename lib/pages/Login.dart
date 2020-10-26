@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -32,8 +33,26 @@ class _State extends State<LoginPage> {
       });
     } else {
       if (datauser[0]['userlevel'] == 'Admin') {
+        //สร้างตัวแปรแบบ SharedPreference
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+
+        //เก็บค่าลงตัวแปรแบบ SharedPreference
+        sharedPreferences.setInt('appStep', 2);
+        sharedPreferences.setString('storeFristname',
+            datauser[0]['emp_fristname'] + ' ' + datauser[0]['emp_lastname']);
+        sharedPreferences.setString('storeAvatar', datauser[0]['emp_img']);
         Navigator.pushReplacementNamed(context, '/HomeStack');
       } else if (datauser[0]['userlevel'] == 'Personnel') {
+        //สร้างตัวแปรแบบ SharedPreference
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+
+        //เก็บค่าลงตัวแปรแบบ SharedPreference
+        sharedPreferences.setInt('appStep', 2);
+        sharedPreferences.setString('storeFristname',
+            datauser[0]['emp_fristname'] + ' ' + datauser[0]['emp_lastname']);
+        sharedPreferences.setString('storeAvatar', datauser[0]['emp_img']);
         Navigator.pushReplacementNamed(context, '/HomeStack');
       }
     }
