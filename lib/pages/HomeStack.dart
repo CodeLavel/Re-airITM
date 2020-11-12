@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutterITM/pages/AboutPage.dart';
 import 'package:flutterITM/pages/HomePage.dart';
 import 'package:flutterITM/pages/ListRepairPage.dart';
+import 'package:flutterITM/pages/Login.dart';
 import 'package:flutterITM/pages/QrScanPage.dart';
 import 'package:flutterITM/pages/RepairPage.dart';
+import 'package:flutterITM/pages/lock_screen.dart';
 
 class HomeStack extends StatefulWidget {
   HomeStack({Key key}) : super(key: key);
@@ -31,6 +33,12 @@ class _HomeStackState extends State<HomeStack> {
             break;
           case 'homestack/qrscan':
             builder = (BuildContext _) => QRScanPage();
+            break;
+          case 'homestack/lockscreen':
+            builder = (BuildContext _) => LockScreen();
+            break;
+          case 'homestack/login':
+            builder = (BuildContext _) => LoginPage();
             break;
           default:
             throw Exception('Invalid route: ${settings.name}');

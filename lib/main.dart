@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterITM/pages/HomeStack.dart';
 import 'package:flutterITM/pages/Login.dart';
 import 'package:flutterITM/pages/WelcomePage.dart';
+import 'package:flutterITM/pages/lock_screen.dart';
 
 void main() {
   runApp(MyApp());

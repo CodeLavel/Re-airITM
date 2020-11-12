@@ -11,38 +11,40 @@ class RepairPage extends StatefulWidget {
 }
 
 class _RepairPageState extends State<RepairPage> {
-  TextEditingController emp_code = TextEditingController();
-  // TextEditingController password = TextEditingController();
+  TextEditingController ac_code = TextEditingController();
+  TextEditingController ac_detail = TextEditingController();
 
   String msg = '';
 
-  Future<List> _login() async {
-    final response = await http
-        .post("http://192.168.1.10/FlutterRepairITM/login.php", body: {
-      "emp_code": emp_code.text,
-      "password": password,
-    });
-    // print(response.body);
-    var datauser = json.decode(response.body);
-    // print(datauser[0]['emp_fristname'] + '' + datauser[0]['emp_lastname']);
-    if (datauser.length == 0) {
-      setState(() {
-        msg = "Login Fail";
-      });
-    } else {
-      if (datauser[0]['userlevel'] == 'Admin') {
-        //สร้างตัวแปรแบบ SharedPreference
-        Navigator.pushReplacementNamed(context, '/dashboard');
-      } else if (datauser[0]['userlevel'] == 'Personnel') {
-        //สร้างตัวแปรแบบ SharedPreference
+  Future<List> _repair() async {
+    // final response = await http
+    //     .post("http://192.168.1.71/FlutterRepairITM/login.php", body: {
+    //   "ac_code": ac_code.text,
+    //   "ac_detail": ac_detail.text,
+    // });
+    // // print(response.body);
+    // var datauser = json.decode(response.body);
+    // // print(datauser[0]['emp_fristname'] + '' + datauser[0]['emp_lastname']);
+    // if (datauser.length == 0) {
+    //   setState(() {
+    //     msg = "Login Fail";
+    //   });
+    // } else {
+    //   if (datauser[0]['userlevel'] == 'Admin') {
+    //     //สร้างตัวแปรแบบ SharedPreference
+    //     Navigator.pushReplacementNamed(context, '/dashboard');
+    //   } else if (datauser[0]['userlevel'] == 'Personnel') {
+    //     //สร้างตัวแปรแบบ SharedPreference
 
-        Navigator.pushReplacementNamed(context, '/dashboard');
-      }
-    }
+    //     Navigator.pushReplacementNamed(context, '/dashboard');
+    //   }
+    // }
+    print(ac_code.text);
+    print(ac_detail.text);
   }
 
   //กำหนดตัวแปร
-  String _empcode, password;
+  String _accode, _acdetail;
 
   //สร้างคีย์เก็บสถานะ
   final formKey = GlobalKey<FormState>();
@@ -66,55 +68,27 @@ class _RepairPageState extends State<RepairPage> {
                 children: [
                   TextFormField(
                     autofocus: false,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     style: TextStyle(fontSize: 20, color: Colors.teal),
-                    controller: emp_code,
-                    decoration: InputDecoration(
-                        icon: Icon(Icons.supervised_user_circle),
-                        labelText: 'รหัสพนักงาน'),
-                    // initialValue: '400068',
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'กรุณากรอกรหัสพนักงานก่อน';
-                      } else {
-                        return null;
-                      }
-                    },
-                    onFieldSubmitted: (String value) {
-                      setState(() {
-                        this._empcode = value;
-                      });
-                    },
-                    onSaved: (value) {
-                      this._empcode = value.trim();
-                    },
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                    autofocus: false,
-                    keyboardType: TextInputType.number,
-                    style: TextStyle(fontSize: 20, color: Colors.teal),
-                    controller: emp_code,
+                    controller: ac_code,
                     decoration: InputDecoration(
                         icon: Icon(Icons.supervised_user_circle),
                         labelText: 'เลขครุภัณฑ์'),
                     // initialValue: '400068',
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'กรุณากรอกข้อมูล';
+                        return 'กรุณากรอเลขครุภัณฑ์';
                       } else {
                         return null;
                       }
                     },
                     onFieldSubmitted: (String value) {
                       setState(() {
-                        this._empcode = value;
+                        this._accode = value;
                       });
                     },
                     onSaved: (value) {
-                      this._empcode = value.trim();
+                      this._accode = value.trim();
                     },
                   ),
                   SizedBox(
@@ -122,12 +96,12 @@ class _RepairPageState extends State<RepairPage> {
                   ),
                   TextFormField(
                     autofocus: false,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     style: TextStyle(fontSize: 20, color: Colors.teal),
-                    controller: emp_code,
+                    controller: ac_detail,
                     decoration: InputDecoration(
                         icon: Icon(Icons.supervised_user_circle),
-                        labelText: 'รหัสพนักงาน'),
+                        labelText: 'รายละเอียด'),
                     // initialValue: '400068',
                     validator: (value) {
                       if (value.isEmpty) {
@@ -138,11 +112,11 @@ class _RepairPageState extends State<RepairPage> {
                     },
                     onFieldSubmitted: (String value) {
                       setState(() {
-                        this._empcode = value;
+                        this._acdetail = value;
                       });
                     },
                     onSaved: (value) {
-                      this._empcode = value.trim();
+                      this._acdetail = value.trim();
                     },
                   ),
                   SizedBox(
@@ -152,9 +126,9 @@ class _RepairPageState extends State<RepairPage> {
                     onPressed: () {
                       if (formKey.currentState.validate()) {
                         formKey.currentState.save();
-                        print(emp_code.text);
-                        print(password);
-                        _login();
+                        print(ac_code.text);
+                        print(ac_detail);
+                        _repair();
                       }
                     },
                     child: Padding(

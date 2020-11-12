@@ -17,7 +17,7 @@ class _ListRepairPageState extends State<ListRepairPage> {
   List<DataRow> listRow = new List<DataRow>();
   Future<List<DataRow>> getRepair() async {
     await http
-        .get("http://192.168.1.10/FlutterITM/getrepair.php")
+        .get("http://192.168.1.71/FlutterITM/getrepair.php")
         .then((response) {
       if (jsonDecode(response.body) != null) {
         setState(() {

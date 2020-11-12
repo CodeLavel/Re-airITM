@@ -12,7 +12,7 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
   //สร้างตัวแปรไว้เก็บชื่อ
-  String _fullname, _avatar;
+  String _fullname, _avatar, _status, _password;
 
   //สร้าง Oject sharepreference
   SharedPreferences sharedPreferences;
@@ -22,6 +22,8 @@ class _AboutPageState extends State<AboutPage> {
     setState(() {
       _fullname = sharedPreferences.getString('storeFristname');
       _avatar = sharedPreferences.getString('storeAvatar');
+      _status = sharedPreferences.getString('storeStatus');
+      _password = sharedPreferences.getString('storePassword');
     });
   }
 
@@ -86,12 +88,9 @@ class _AboutPageState extends State<AboutPage> {
                 child: CircleAvatar(
                   radius: 50,
                   backgroundColor: Colors.white,
-                  child: _avatar != null
-                      ? CircleAvatar(
-                          radius: 46.0,
-                          backgroundImage: NetworkImage('$_avatar'),
-                        )
-                      : CircularProgressIndicator(),
+                  child: Image(
+                    image: AssetImage('assets/images/avatar.png'),
+                  ),
                 ),
               ),
               SizedBox(
@@ -111,17 +110,17 @@ class _AboutPageState extends State<AboutPage> {
         ),
         ListTile(
           leading: Icon(Icons.person),
-          title: Text('ข้อมูลผู้ใช้'),
+          title: Text('ข้อมูลผู้ใช้ : $_fullname'),
           onTap: () {},
         ),
         ListTile(
-          leading: Icon(Icons.fact_check),
-          title: Text('สถานะ'),
+          leading: Icon(Icons.satellite),
+          title: Text('สถานะ : $_status'),
           onTap: () {},
         ),
         ListTile(
           leading: Icon(Icons.lock),
-          title: Text('เปลี่ยนรหัสผ่าน'),
+          title: Text('เปลี่ยนรหัสผ่าน : $_password'),
           onTap: () {},
         ),
         ListTile(
@@ -132,7 +131,9 @@ class _AboutPageState extends State<AboutPage> {
         ListTile(
           leading: Icon(Icons.exit_to_app),
           title: Text('ออกจากระบบ'),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushReplacementNamed(context, 'homestack/login');
+          },
         ),
       ],
     ));

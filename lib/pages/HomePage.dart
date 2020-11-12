@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white,
           ),
           Icon(
-            Icons.qr_code,
+            Icons.check,
             size: 30,
             color: Colors.white,
           ),

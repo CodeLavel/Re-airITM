@@ -17,7 +17,7 @@ class _State extends State<LoginPage> {
 
   Future<List> _login() async {
     final response =
-        await http.post("http://192.168.1.10/FlutterITM/login.php", body: {
+        await http.post("http://192.168.1.71/FlutterITM/login.php", body: {
       "emp_code": emp_code.text,
       "password": password.text,
     });
@@ -41,6 +41,8 @@ class _State extends State<LoginPage> {
         sharedPreferences.setInt('appStep', 2);
         sharedPreferences.setString('storeFristname',
             datauser[0]['emp_fristname'] + ' ' + datauser[0]['emp_lastname']);
+        sharedPreferences.setString('storeStatus', datauser[0]['userlevel']);
+        sharedPreferences.setString('storePassword', datauser[0]['password']);
         sharedPreferences.setString('storeAvatar', datauser[0]['emp_img']);
         Navigator.pushReplacementNamed(context, '/HomeStack');
       } else if (datauser[0]['userlevel'] == 'Personnel') {
@@ -52,6 +54,8 @@ class _State extends State<LoginPage> {
         sharedPreferences.setInt('appStep', 2);
         sharedPreferences.setString('storeFristname',
             datauser[0]['emp_fristname'] + ' ' + datauser[0]['emp_lastname']);
+        sharedPreferences.setString('storeStatus', datauser[0]['userlevel']);
+        sharedPreferences.setString('storePassword', datauser[0]['password']);
         sharedPreferences.setString('storeAvatar', datauser[0]['emp_img']);
         Navigator.pushReplacementNamed(context, '/HomeStack');
       }
