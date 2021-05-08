@@ -30,12 +30,11 @@ class _MenuState extends State<Menu> {
               ),
             ),
             FutureBuilder(
-                future: FlutterSession().get('token'),
+                // future: FlutterSession().get('token'),
                 builder: (context, snapshot) {
-                  return Text(snapshot.hasData
-                      ? snapshot.data.toString()
-                      : 'Loading....');
-                }),
+              return Text(
+                  snapshot.hasData ? snapshot.data.toString() : 'Loading....');
+            }),
             ListTile(
               leading: Icon(Icons.home),
               title: Text('หน้าหลัก'),
